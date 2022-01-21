@@ -19,6 +19,9 @@ import pl.mdyrkacz.homepageapp.setting.SettingService;
 import pl.mdyrkacz.homepageapp.weather.Weather;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
@@ -47,6 +50,7 @@ public class UserController {
         model.addAttribute("active", userService.getActiveNewsCategoryName(newsCategory, entityUser));
         model.addAttribute("tweets", customUser.getUser().tweetPageList);
         return "user/homepage";
+
     }
 
     @GetMapping("/tweets")

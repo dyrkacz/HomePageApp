@@ -1,6 +1,7 @@
 package pl.mdyrkacz.homepageapp.event;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final int pageSize = 10;

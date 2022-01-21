@@ -17,6 +17,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.hibernate.Hibernate;
 import org.json.JSONObject;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.mdyrkacz.homepageapp.api.JsonReader;
@@ -202,6 +203,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Async
     public void getTwitterPage(String twitterId, String twitterToken, User user) {
         user.tweetPageList.clear();
         String userid = twitterId;
@@ -245,8 +247,7 @@ public class UserServiceImpl implements UserService {
         HttpEntity entityUsers = responseUsersTimeline.getEntity();
         String resultUsers = EntityUtils.toString(entityUsers);
         ObjectMapper objectMapperUsers = new ObjectMapper();
-        TwitterUserTimeline twitterUserTimeline = objectMapperUsers.readValue(resultUsers, TwitterUserTimeline.class);
-        return twitterUserTimeline;
+        return objectMapperUsers.readValue(resultUsers, TwitterUserTimeline.class);
     }
 
     private Tweet getTweet(String bearerToken, CloseableHttpClient httpclient, TwitterUserDataTimeline twitterUserDataTimeline) throws IOException {
@@ -260,8 +261,7 @@ public class UserServiceImpl implements UserService {
         HttpEntity entityTweets = responseTweets.getEntity();
         String resultTweets = EntityUtils.toString(entityTweets);
         ObjectMapper objectMapperTweets = new ObjectMapper();
-        Tweet tweet = objectMapperTweets.readValue(resultTweets, Tweet.class);
-        return tweet;
+        return objectMapperTweets.readValue(resultTweets, Tweet.class);
     }
 
     private TwitterUser getTwitterUser(String bearerToken, CloseableHttpClient httpclient, TwitterUserDataTimeline twitterUserDataTimeline) throws IOException {
@@ -273,8 +273,7 @@ public class UserServiceImpl implements UserService {
         HttpEntity entityUser = responseUser.getEntity();
         String resultUser = EntityUtils.toString(entityUser);
         ObjectMapper objectMapperUser = new ObjectMapper();
-        TwitterUser twitterUser = objectMapperUser.readValue(resultUser, TwitterUser.class);
-        return twitterUser;
+        return objectMapperUser.readValue(resultUser, TwitterUser.class);
     }
 
     private String decodeToken(String token) {

@@ -27,7 +27,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     double countAllActiveEvents(User user, LocalDate date, LocalTime time);
 
     @Query("select e from Event e where e.user=?1 and e.eventExecutionDate < ?2 or " +
-            "e.user=?1 and e.eventExecutionDate = ?2 and e.eventExecutionTime < ?3 order by e.eventExecutionDate , e.eventExecutionTime desc")
+            "e.user=?1 and e.eventExecutionDate = ?2 and e.eventExecutionTime < ?3 order by e.eventExecutionDate desc, e.eventExecutionTime desc")
     List<Event> findAllOldEvents(User user, LocalDate date, LocalTime time, Pageable pageable);
 
     @Query("select count(e) from Event e where e.user=?1 and e.eventExecutionDate < ?2 or " +
@@ -56,7 +56,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAllIndefinitePanel(User user);
 
     @Query("select e from Event e where e.user=?1 and e.eventExecutionDate < ?2  and e.eventExecutionDate > ?4 or " +
-            "e.user=?1 and e.eventExecutionDate = ?2 and e.eventExecutionTime < ?3 and e.eventExecutionDate > ?4 order by e.eventExecutionDate , e.eventExecutionTime desc")
+            "e.user=?1 and e.eventExecutionDate = ?2 and e.eventExecutionTime < ?3 order by e.eventExecutionDate desc, e.eventExecutionTime desc")
     List<Event> findAllOldEvents5Days(User user, LocalDate nowDate, LocalTime time, LocalDate fiveDays);
 
     @Query("select e from Event e where e.user=?1 and e.eventExecutionDate > ?2 and e.eventExecutionDate <?4 and e.done = true or " +

@@ -333,7 +333,7 @@
                                                         </div>
                                                     </li>
                                                 </c:when>
-                                                <c:when test="${activeevent.priority == 'Important'}">
+                                                <c:when test="${passed.priority == 'Important'}">
                                                     <li class="list-group-item list-group-item-warning"
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="${passed.eventDescription}">
@@ -347,7 +347,7 @@
                                                         </div>
                                                     </li>
                                                 </c:when>
-                                                <c:when test="${activeevent.priority == 'Urgent'}">
+                                                <c:when test="${passed.priority == 'Urgent'}">
                                                     <li class="list-group-item list-group-item-danger"
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="${passed.eventDescription}">
